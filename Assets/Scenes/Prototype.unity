@@ -328,26 +328,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 794882386}
   m_CullTransparentMesh: 0
---- !u!1 &801211794 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5898587284683989941, guid: 0eb6a2311c9d6c54da4bb8c998fe84c0,
-    type: 3}
-  m_PrefabInstance: {fileID: 5898587284128140686}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &801211795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 801211794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39421c921bc809144ab5be54201fe86d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyMaxHealth: 100
-  enemyDamage: 1
 --- !u!1 &908738087
 GameObject:
   m_ObjectHideFlags: 0
@@ -2152,11 +2132,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5898587284683989936, guid: 0eb6a2311c9d6c54da4bb8c998fe84c0,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 5898587284683989937, guid: 0eb6a2311c9d6c54da4bb8c998fe84c0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2216,11 +2191,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Zombie
-      objectReference: {fileID: 0}
-    - target: {fileID: 5898587284683989941, guid: 0eb6a2311c9d6c54da4bb8c998fe84c0,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0eb6a2311c9d6c54da4bb8c998fe84c0, type: 3}
