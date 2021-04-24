@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
         Jump();
 
         //Ataque
-        Attack();
+        //Attack();
     }
 
     private void FixedUpdate()
@@ -158,10 +158,8 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
-    private void Attack()
+    public void Attack()
     {
-        if(attackButtonDown)
-        {
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayers);
 
             foreach (Collider2D enemy in hitEnemies)
@@ -170,7 +168,7 @@ public class PlayerController : MonoBehaviour
                 enemyController.TakeDamage(scytheDamage);
                 Debug.Log("Reaper Bronson hit " + enemy.name);
             }
-        }
+
     }
 
     public void TakeDamage(int damage)

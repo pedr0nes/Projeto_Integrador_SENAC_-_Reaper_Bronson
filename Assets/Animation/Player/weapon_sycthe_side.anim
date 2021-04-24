@@ -22,50 +22,50 @@ AnimationClip:
     - time: 0
       value: {fileID: -5976516271593428564, guid: a3ab5d022ca24edbab034ef490e4e8db,
         type: 3}
-    - time: 0.05
+    - time: 0.025
       value: {fileID: 8662598778089055751, guid: a3ab5d022ca24edbab034ef490e4e8db,
         type: 3}
-    - time: 0.1
+    - time: 0.05
       value: {fileID: 6526560423545924460, guid: a3ab5d022ca24edbab034ef490e4e8db,
         type: 3}
-    - time: 0.15
+    - time: 0.075
       value: {fileID: 1952950570906857887, guid: a3ab5d022ca24edbab034ef490e4e8db,
         type: 3}
-    - time: 0.2
+    - time: 0.1
       value: {fileID: -2738644331847009788, guid: a3ab5d022ca24edbab034ef490e4e8db,
         type: 3}
-    - time: 0.25
+    - time: 0.125
       value: {fileID: -8149644795044491681, guid: a3ab5d022ca24edbab034ef490e4e8db,
         type: 3}
-    - time: 0.3
+    - time: 0.15
       value: {fileID: 7527427152574064779, guid: a3ab5d022ca24edbab034ef490e4e8db,
         type: 3}
-    - time: 0.35
+    - time: 0.175
       value: {fileID: -636152645787474920, guid: a3ab5d022ca24edbab034ef490e4e8db,
         type: 3}
-    - time: 0.4
+    - time: 0.2
       value: {fileID: 7970160491953025584, guid: a3ab5d022ca24edbab034ef490e4e8db,
         type: 3}
-    - time: 0.45
+    - time: 0.225
       value: {fileID: -4504328170665831972, guid: a3ab5d022ca24edbab034ef490e4e8db,
         type: 3}
-    - time: 0.5
+    - time: 0.25
       value: {fileID: -7656658776567591411, guid: a3ab5d022ca24edbab034ef490e4e8db,
         type: 3}
-    - time: 0.55
+    - time: 0.275
       value: {fileID: -759676923923610869, guid: a3ab5d022ca24edbab034ef490e4e8db,
         type: 3}
-    - time: 0.6
+    - time: 0.3
       value: {fileID: 2628395139614331280, guid: a3ab5d022ca24edbab034ef490e4e8db,
         type: 3}
-    - time: 0.65
+    - time: 0.325
       value: {fileID: -2666848823366182010, guid: a3ab5d022ca24edbab034ef490e4e8db,
         type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 20
+  m_SampleRate: 40
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -99,7 +99,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.7
+    m_StopTime: 0.35
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -118,4 +118,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.15
+    functionName: CallAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

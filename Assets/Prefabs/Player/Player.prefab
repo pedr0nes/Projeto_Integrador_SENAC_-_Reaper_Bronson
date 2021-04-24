@@ -89,7 +89,7 @@ GameObject:
   m_Layer: 0
   m_Name: Attack Point
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -101,7 +101,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131602798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0.64, z: 0}
+  m_LocalPosition: {x: -0.87, y: 0.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5475525092729168710}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 5475525092729168826}
   - component: {fileID: 1526486691}
   - component: {fileID: 1650606534}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,8 +261,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   speedInAir: 7
-  jumpForce: 10
+  jumpForce: 10.2
   jumpTime: 0.35
+  scytheDamage: 10
+  maxPlayerHearts: 0
   feetPos: {fileID: 5475525093197206836}
   headPos: {fileID: 5475525093838300309}
   attackPoint: {fileID: 2131602799}
@@ -272,7 +274,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  attackRadius: 0.75
+  attackRadius: 0.99
   checkRadius: 0.3
   OnLandEvent:
     m_PersistentCalls:
@@ -321,6 +323,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerShootingSprite: {fileID: 8333481726314500824, guid: ed21f028788049ce817cc2724e5943f4,
     type: 3}
+  rifleBulletPrefab: {fileID: 0}
+  shootingPoint: {fileID: 0}
   OnShootEvent:
     m_PersistentCalls:
       m_Calls:
@@ -418,6 +422,7 @@ GameObject:
   - component: {fileID: 8348619584228146852}
   - component: {fileID: 8348619584228146853}
   - component: {fileID: 8348619584228146858}
+  - component: {fileID: 1003144149}
   m_Layer: 0
   m_Name: weapon_sycthe_side
   m_TagString: Untagged
@@ -508,6 +513,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1003144149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8348619584228146859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f429d66eb38f649ad65d3f2ed3b52f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlayerController: {fileID: 5475525092729168825}
 --- !u!1 &8348619584335702989
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,7 +727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8399489300025751078
 Transform:
   m_ObjectHideFlags: 0

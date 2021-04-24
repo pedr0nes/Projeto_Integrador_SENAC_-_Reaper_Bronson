@@ -24,4 +24,9 @@ public class ScytheAnimation : MonoBehaviour
             scytheArmAnimator.SetTrigger("Attack");
         }
     }
+
+
+
+
+
 }
