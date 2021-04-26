@@ -32,7 +32,7 @@ public class PatrolOnGround : MonoBehaviour
 
         if ((groundInfo.collider == true || enemyInfo.collider == true) && enemyInfo.collider != gameObject.GetComponent<Collider2D>())
         {
-            Debug.Log("zumbi bateu na parede");
+
             if (isMovingLeft)
             {
                 transform.eulerAngles = new Vector3(0, -180, 0);

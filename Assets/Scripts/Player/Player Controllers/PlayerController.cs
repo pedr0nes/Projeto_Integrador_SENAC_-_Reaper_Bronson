@@ -11,23 +11,29 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpTime;
     [SerializeField] private float scytheDamage;
     [SerializeField] private int maxPlayerHearts;
+    [SerializeField] private int maxPlayerLifes;
     private int currentPlayerHearts;
+
 
     [SerializeField] private Transform feetPos;
     [SerializeField] private Transform headPos;
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private LayerMask whatIsTrap;
     [SerializeField] private float attackRadius;
     [SerializeField] private float checkRadius;
 
     [Header("Events")]
     [Space]
     public UnityEvent OnLandEvent;
+    [Space]
 
+    [SerializeField] private PlayerSFX playerSFXManager;
     private Rigidbody2D m_Rigidbody2D;
     private ShootingMode m_ShootingMode;
-    
+    private GameManager m_GameManager;
+    private Animator m_Animator;
 
     private float moveInput;
     private bool jumpButtonDown;
@@ -40,21 +46,35 @@ public class PlayerController : MonoBehaviour
     private bool isTouchingCeiling;
     private bool isJumping;
     private bool facingRight = true;
-    
-    
+    private bool lostAllHearts;
+    private bool lostAllLives;
+
+
+    private void Awake()
+    {
+        m_GameManager = FindObjectOfType<GameManager>();
+    }
 
     void Start()
     {
+        m_Animator = GetComponent<Animator>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_ShootingMode = GetComponent<ShootingMode>();
         m_ShootingMode.enabled = false;
         currentPlayerHearts = maxPlayerHearts;
-        
+        m_GameManager.CurrentNumberOfHearts = maxPlayerHearts;
+
+        lostAllLives = false;
+        lostAllHearts = false;
+
     }
 
     void Update()
     {
 
+
+        m_GameManager = FindObjectOfType<GameManager>();
+        m_GameManager.CurrentNumberOfHearts = currentPlayerHearts;
         //Pega Inputs
         moveInput = Input.GetAxisRaw("Horizontal");
         jumpButtonDown = Input.GetButtonDown("Jump");
@@ -74,6 +94,8 @@ public class PlayerController : MonoBehaviour
 
         //Pulo
         Jump();
+
+        LifeManager();
 
         //Ataque
         //Attack();
@@ -103,6 +125,10 @@ public class PlayerController : MonoBehaviour
         
         //Mover
         Move();
+
+        TrapDamage();
+
+
     }
 
     //Métodos
@@ -124,6 +150,7 @@ public class PlayerController : MonoBehaviour
         //Pula se recebeu input e está no chão
         if (isGrounded && jumpButtonDown)
         {
+            playerSFXManager.PlayJumpSFX();
             isJumping = true;
             jumpTimeCounter = jumpTime;
             m_Rigidbody2D.velocity = Vector2.up * jumpForce;
@@ -165,18 +192,68 @@ public class PlayerController : MonoBehaviour
             foreach (Collider2D enemy in hitEnemies)
             {
                 EnemyController enemyController = enemy.GetComponent<EnemyController>();
+                playerSFXManager.PlayWeaponHitSFX();
                 enemyController.TakeDamage(scytheDamage);
-                Debug.Log("Reaper Bronson hit " + enemy.name);
+
             }
 
     }
 
     public void TakeDamage(int damage)
     {
+        playerSFXManager.PlayTakeDamageSFX();
+        m_Animator.SetTrigger("TakeDamage");
         currentPlayerHearts -= damage;
-        Debug.Log("Reaper Bronson got hit!");
-        Debug.Log("Remaining hearts = " + currentPlayerHearts);
     }
+
+
+    private void LifeManager()
+    {
+        if (m_GameManager.CurrentNumberOfLifes <= 0)
+        {
+            lostAllLives = true;
+ 
+            CallKillPlayerAnimation();
+
+        }
+        else
+        {
+            if (currentPlayerHearts <= 0)
+            {
+                CallDeathSound();
+                CallKillPlayerAnimation();
+
+            }
+        }
+    }
+
+    private void TrapDamage()
+    {
+        if(GetComponent<Collider2D>().IsTouchingLayers(whatIsTrap))
+        {
+            TakeDamage(5);
+        }
+    }
+
+
+    private void CallKillPlayerAnimation()
+    {
+        m_Rigidbody2D.velocity = Vector3.zero;
+        m_Rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        m_Animator.SetBool("LostAllHearts", true);
+
+    }
+
+    private void CallDeathSound()
+    {
+        if(!lostAllHearts)
+        {
+            playerSFXManager.PlayDeathSFX();
+            lostAllHearts = true;
+        }
+    }
+
 
     //Mostra o raio do ataque físico
     private void OnDrawGizmosSelected()
@@ -190,6 +267,7 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.CompareTag("Item"))
         {
             m_ShootingMode.enabled = true;
+            playerSFXManager.PlayDrawGunSFX();
             Destroy(collision.gameObject);
         }
     }
@@ -235,4 +313,33 @@ public class PlayerController : MonoBehaviour
             return attackButtonDown;
         }
     }
+
+    public int MaxPlayerLifes
+    {
+        get
+        {
+            return maxPlayerLifes;
+        }
+    }
+
+    public int CurrentPlayerHearts
+    {
+        get
+        {
+            return currentPlayerHearts;
+        }
+        set
+        {
+            currentPlayerHearts = value;
+        }
+    }
+
+    public bool LostAllLives
+    {
+        get
+        {
+            return lostAllLives;
+        }
+    }
+
 }

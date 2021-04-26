@@ -6,6 +6,7 @@ public class BulletController : MonoBehaviour
 {
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float bulletDamage;
+    [SerializeField] private BulletSFX bulletSFXManager;
     private Rigidbody2D m_Rigidbody2D;
     
 
@@ -27,8 +28,13 @@ public class BulletController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
+            Debug.Log("tiro acertoui zomnie");
+            bulletSFXManager.PlayBulletHitSFX();
             enemy.TakeDamage(bulletDamage);
             Destroy(gameObject);
         }
     }
+
+
+
 }

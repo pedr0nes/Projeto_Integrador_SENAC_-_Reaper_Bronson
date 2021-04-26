@@ -5,6 +5,7 @@ using UnityEngine;
 public class ScytheDamageController : MonoBehaviour
 {
     [SerializeField] private PlayerController m_PlayerController;
+    [SerializeField] private PlayerSFX playerSFXManager;
     // Start is called before the first frame update
 
 
@@ -12,5 +13,11 @@ public class ScytheDamageController : MonoBehaviour
     {
         m_PlayerController.Attack();
     }
+
+    public void CallScytheSFX()
+    {
+        playerSFXManager.PlayScytheAttackSFX();
+    }
+
 
 }

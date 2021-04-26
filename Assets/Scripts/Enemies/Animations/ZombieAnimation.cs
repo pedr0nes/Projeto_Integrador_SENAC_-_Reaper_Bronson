@@ -9,9 +9,12 @@ public class ZombieAnimation : MonoBehaviour
     [SerializeField] Transform attackPoint;
     [SerializeField] private float playerDetectionRadius;
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private ZombieSFX zombieSFXManager;
     private Animator m_animator;
     private Collider2D isPlayerNearby;
     private bool alreadySpawned = false;
+
+    private bool dieSFXplayed = false;
    // private Rigidbody2D rigidbody;
 
 
@@ -23,6 +26,10 @@ public class ZombieAnimation : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        zombieSFXManager.PlayZombieSpawnSFX();
+    }
 
     // Update is called once per frame
     void Update()
@@ -57,6 +64,7 @@ public class ZombieAnimation : MonoBehaviour
         {
             patrolScript.enabled = false;
             m_animator.SetTrigger("Attack");
+
         }
         else
         {
@@ -76,14 +84,30 @@ public class ZombieAnimation : MonoBehaviour
 
     public void PlayDeathAnimation()
     {
+
         patrolScript.enabled = false;
         m_animator.SetBool("IsDead", true);
     }
 
     public void KillEnemy()
     {
-        
         m_EnemyController.KillEnemy();
+    }
+
+
+    public void CallZombieAttackSFX()
+    {
+        zombieSFXManager.PlayZombieAttackSFX();
+    }
+
+    public void CallZombieDieSFX()
+    {
+        if(!dieSFXplayed)
+        {
+            zombieSFXManager.PlayZombieDieSFX();
+            dieSFXplayed = true;
+        }
+
     }
 
     private void OnDrawGizmosSelected()

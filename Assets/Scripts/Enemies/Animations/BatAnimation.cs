@@ -11,6 +11,7 @@ public class BatAnimation : MonoBehaviour
     [SerializeField] private Transform[] spawners;
     [SerializeField] private EnemyController m_EnemyController;
     [SerializeField] private Rigidbody2D m_Rigidbody2D;
+    [SerializeField] private BatSFX batSFXManager;
 
 
     private Animator m_Animator;
@@ -30,7 +31,6 @@ public class BatAnimation : MonoBehaviour
         {
             if(isPlayerNearby)
             {
-                Debug.Log("chegou");
                 Attack();
                 yield return new WaitForSeconds(2f);
             }
@@ -57,11 +57,12 @@ public class BatAnimation : MonoBehaviour
     private void Attack()
     {
         m_Animator.SetTrigger("Attack");
-        Debug.Log("Atacou");
+
     }
 
     public void InstantiateBatAttack()
     {
+        batSFXManager.PlayBatAttackSFX();
         foreach (Transform spawner in spawners)
         {
             Instantiate(sonicWavePrefab, spawner.position, spawner.rotation);
@@ -82,6 +83,7 @@ public class BatAnimation : MonoBehaviour
 
     public IEnumerator KillEnemy()
     {
+        batSFXManager.PlayBatDieSFX();
         m_Animator.SetBool("IsAlreadyDead", true);
         yield return new WaitForSeconds(1f);
         m_EnemyController.KillEnemy();

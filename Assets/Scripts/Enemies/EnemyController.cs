@@ -55,14 +55,14 @@ public class EnemyController : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
             player.TakeDamage(enemyTouchDamage);
         }
-    }
+    }*/
 
     public int EnemyAttackDamage
     {

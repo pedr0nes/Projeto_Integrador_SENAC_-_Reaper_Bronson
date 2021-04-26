@@ -8,13 +8,15 @@ public class ShootingMode : MonoBehaviour
     [SerializeField] Sprite playerShootingSprite;
     [SerializeField] GameObject rifleBulletPrefab;
     [SerializeField] Transform shootingPoint;
+    [SerializeField] private PlayerSFX playerSFXManager;
+    [SerializeField] private GameObject rifleCanvasImage;
 
     private PlayerController m_PlayerController;
     private Rigidbody2D m_Rigidbody;
     private Animator m_Animator;
     private Transform rifle;
 
-    private bool isInShootingMode = false;
+    private bool shootingModeAlreadyCalled = false;
 
     [Header("Events")]
     [Space]
@@ -28,10 +30,12 @@ public class ShootingMode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         m_PlayerController = GetComponent<PlayerController>();
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
         rifle = transform.Find("Rifle");
+        rifleCanvasImage.SetActive(false);
     }
 
     // Update is called once per frame
@@ -48,7 +52,8 @@ public class ShootingMode : MonoBehaviour
 
         if (m_PlayerController.IsGrounded && Input.GetButton("Fire2"))
         {
-            isInShootingMode = true;
+            rifleCanvasImage.SetActive(true);
+            CallDrawGunSFX();
             m_Animator.enabled = false;
             GetComponent<SpriteRenderer>().sprite = playerShootingSprite;
             rifle.gameObject.SetActive(true);
@@ -63,10 +68,11 @@ public class ShootingMode : MonoBehaviour
         }
         else
         {
-            isInShootingMode = false;
+            shootingModeAlreadyCalled = false;
             m_PlayerController.enabled = true;
             m_Animator.enabled = true;
             rifle.gameObject.SetActive(false);
+            rifleCanvasImage.SetActive(true);
         }
     }
 
@@ -75,6 +81,17 @@ public class ShootingMode : MonoBehaviour
     {
         OnShootEvent.Invoke();
         Instantiate(rifleBulletPrefab, shootingPoint.position, transform.rotation);
+        playerSFXManager.PlayGunShotSFX();
     }
+
+    private void CallDrawGunSFX()
+    {
+        if(!shootingModeAlreadyCalled)
+        {
+            playerSFXManager.PlayDrawGunSFX();
+            shootingModeAlreadyCalled = true;
+        }
+    }
+
 
 }

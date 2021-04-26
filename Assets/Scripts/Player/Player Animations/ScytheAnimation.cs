@@ -6,6 +6,7 @@ public class ScytheAnimation : MonoBehaviour
 {
     [SerializeField] private Animator scytheAnimator;
     [SerializeField] private Animator scytheArmAnimator;
+
     private PlayerController m_PlayerController;
 
 
@@ -20,6 +21,7 @@ public class ScytheAnimation : MonoBehaviour
     {
         if(m_PlayerController.AttackButtonDown)
         {
+            
             scytheAnimator.SetTrigger("Attack");
             scytheArmAnimator.SetTrigger("Attack");
         }

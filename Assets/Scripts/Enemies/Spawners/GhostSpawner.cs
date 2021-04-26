@@ -31,7 +31,7 @@ public class GhostSpawner : MonoBehaviour
         {
             if (isPlayerNearby && enemiesAround.Length < maxNumberOfSpawns)
             {
-                Debug.Log("chegou");
+  
                 SpawnGhost();
                 yield return new WaitForSeconds(secondsToNewSpawn);
             }
