@@ -29,7 +29,8 @@ public class HeartController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_GameManager = FindObjectOfType<GameManager>();
+
+        //m_GameManager = FindObjectOfType<GameManager>();
         if (m_GameManager.CurrentNumberOfHearts == 5)
         {
             heart0.SetActive(true);

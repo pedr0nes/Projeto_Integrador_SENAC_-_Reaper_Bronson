@@ -185,7 +185,8 @@ GameObject:
   - component: {fileID: 4440896696921629881}
   - component: {fileID: 4440896696921629882}
   - component: {fileID: 1763279172}
-  - component: {fileID: 1382064529}
+  - component: {fileID: 843278939223545998}
+  - component: {fileID: 1980108017}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -290,7 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiPath: {fileID: 1879891306}
---- !u!114 &1382064529
+--- !u!114 &843278939223545998
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -299,16 +300,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 4440896696921629884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bcb627bcc5127f4ca5babb08dafd59b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1923a8f29705a9245a007ab394d9cc41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 1879891309}
-  attackPoint: {fileID: 470189655}
-  playerDetectionRadius: 0.4
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  ghostSFXManager: {fileID: 1943081191}
+--- !u!114 &1980108017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4440896696921629884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1923a8f29705a9245a007ab394d9cc41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4440896697017780000
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,8 +328,9 @@ GameObject:
   - component: {fileID: 1879891305}
   - component: {fileID: 1879891306}
   - component: {fileID: 1879891307}
-  - component: {fileID: 1879891309}
   - component: {fileID: 1411186754}
+  - component: {fileID: 711840891}
+  - component: {fileID: 7679153826162970583}
   m_Layer: 9
   m_Name: Ghost
   m_TagString: Enemy
@@ -441,21 +448,6 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &1879891309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4440896697017780000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39421c921bc809144ab5be54201fe86d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyMaxHealth: 10
-  enemyTouchDamage: 1
-  enemyAttackDamage: 1
 --- !u!50 &1411186754
 Rigidbody2D:
   serializedVersion: 4
@@ -477,3 +469,34 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &711840891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4440896697017780000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b1e9fe06db256e40a49cde9f0db5a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 4440896696921629881}
+  ghostData: {fileID: 11400000, guid: 258f732f6fee0c14ba7997c501653296, type: 2}
+  attackDetectionPoint: {fileID: 470189655}
+  ghostEventManager: {fileID: 7679153826162970583}
+  ghostAnimationEvents: {fileID: 1980108017}
+  ghostSFX: {fileID: 1943081191}
+--- !u!114 &7679153826162970583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4440896697017780000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b2afe181bccb0a4ba5c52266cd14aab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisGhost: {fileID: 711840891}

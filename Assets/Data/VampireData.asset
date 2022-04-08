@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61775b87e07c30e4d9083ac07643dd8c, type: 3}
+  m_Name: VampireData
+  m_EditorClassIdentifier: 
+  lives: 20
+  idleTime: 2
+  movementVelocity: 5
+  minWalkTime: 2
+  maxWalkTime: 3
+  attackDamage: 1
+  invisibleTime: 3
+  groundCheckLenght: 0.3
+  attackDetectionRadius: 1
+  batAttackRadius: 1.2
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 256
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 512
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 1024

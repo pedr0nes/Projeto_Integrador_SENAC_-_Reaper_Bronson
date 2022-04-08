@@ -5,17 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] PlayerController player;
+    [SerializeField] Player player;
     [SerializeField] GameObject heartsDisplay;
 
+    [SerializeField] GameObject winCanvas;
+    [SerializeField] GameObject gameOverCanvas;
+
     private int currentNumberOfHearts = 5;
-    private int currentNumberOfLifes = 3;
+    private int currentNumberOfLives = 3;
     private bool playerWon = false;
 
     private void Awake()
     {
-        SetUpSingleton();
-        currentNumberOfLifes = player.MaxPlayerLifes;
+        //SetUpSingleton();
+        currentNumberOfHearts = player.CurrentHealth;
+        winCanvas.SetActive(false);
+        gameOverCanvas.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -27,8 +32,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = FindObjectOfType<PlayerController>();
-        Debug.Log("vidas do gam3e manager: " + currentNumberOfLifes);
+        currentNumberOfHearts = player.CurrentHealth;
+
+        if(playerWon)
+        {
+            winCanvas.SetActive(true);
+        }
+
+        if(currentNumberOfHearts <=0)
+        {
+            gameOverCanvas.SetActive(true);
+        }
+
+
     }
 
     private void SetUpSingleton()
@@ -43,15 +59,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void RestartScene()
-    {
-        SceneManager.LoadScene(1);
-    }
+    //public void RestartScene()
+    //{
+    //    SceneManager.LoadScene(1);
+    //}
 
-    public void LoadFinalScene()
-    {
-        SceneManager.LoadScene(2);
-    }
+    //public void LoadFinalScene()
+    //{
+    //    SceneManager.LoadScene(2);
+    //}
 
 
     public int CurrentNumberOfHearts
@@ -70,11 +86,11 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            return currentNumberOfLifes;
+            return currentNumberOfLives;
         }
         set
         {
-            currentNumberOfLifes = value;
+            currentNumberOfLives = value;
         }
     }
 

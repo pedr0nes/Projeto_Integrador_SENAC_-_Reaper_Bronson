@@ -188,6 +188,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lives Remaining
       objectReference: {fileID: 0}
+    - target: {fileID: 3593760909686929392, guid: b636f78dc4cda2744a99be0da3e19283,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3593760909686929399, guid: b636f78dc4cda2744a99be0da3e19283,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -12,7 +12,8 @@ public class PlayerSFX : MonoBehaviour
     [SerializeField] public AudioClip drawGun;
     [SerializeField] public AudioClip takeDamage;
     [SerializeField] public AudioClip death;
-    
+    [SerializeField] public AudioClip playerWins;
+
 
 
     private void Awake()
@@ -56,4 +57,8 @@ public class PlayerSFX : MonoBehaviour
         audioSource.PlayOneShot(death);
     }
 
+    public void PlayWinSFX()
+    {
+        audioSource.PlayOneShot(playerWins);
+    }
 }

@@ -45,3 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   heartsDisplay: {fileID: 0}
+  winCanvas: {fileID: 0}
+  gameOverCanvas: {fileID: 0}

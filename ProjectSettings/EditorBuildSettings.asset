@@ -6,12 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
+    path: Assets/Scenes/Menu Principal.unity
     guid: b8a006227893c7a45beb258c6988ee22
   - enabled: 1
-    path: Assets/Scenes/Stage 1.unity
-    guid: e1d0a660ac15dbb4786686f1a23462e1
+    path: Assets/Scenes/Menu Filmes.unity
+    guid: 006e39dfdd781d144a4c8b4a7f23d335
   - enabled: 1
-    path: Assets/Scenes/Terminou.unity
-    guid: 3a3b6252d8f917b41b947a976bd1df85
+    path: "Assets/Scenes/Menu Instru\xE7\xF5es.unity"
+    guid: d331eedd80e269342aa01dd4b7ba507c
+  - enabled: 1
+    path: "Assets/Scenes/Menu Cr\xE9ditos.unity"
+    guid: 39aaaae87c542794ab4d9e0f32feb12e
+  - enabled: 1
+    path: Assets/Scenes/Menu Atos.unity
+    guid: b94f9436fa545f449bfac43c7e77f30e
+  - enabled: 1
+    path: Assets/Scenes/Stage 1.unity
+    guid: 851594ed5a356a44ea667bc52362bfe1
+  - enabled: 1
+    path: Assets/Scenes/Stage 2.unity
+    guid: 50b0e40a34f7a91409ce584dac46134f
+  - enabled: 1
+    path: Assets/Scenes/Stage Boss.unity
+    guid: 4694a26c2c4de0f4c858d0cf3f860fc9
   m_configObjects: {}

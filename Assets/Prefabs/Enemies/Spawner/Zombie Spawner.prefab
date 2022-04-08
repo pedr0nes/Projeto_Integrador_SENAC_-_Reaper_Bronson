@@ -82,7 +82,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  zombiePrefab: {fileID: 8212927015860852954, guid: 0eb6a2311c9d6c54da4bb8c998fe84c0,
+  zombiePrefab: {fileID: 6746369838022129122, guid: 46f5a6f2929d7b44086c6b382840079c,
     type: 3}
   secondsToNewSpawn: 5
   maxNumberOfSpawns: 1
