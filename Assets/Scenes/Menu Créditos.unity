@@ -435,14 +435,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Esse jogo foi desenvolvido por Pedro Fidler como trabalho de conclus\xE3o
-    do curso T\xE9cnico em Programa\xE7\xE3o de Jogos Digitais. O game n\xE3o \xE9
-    monetizado de forma alguma e tem apenas a finalidade de estudo e constru\xE7\xE3o
-    de portf\xF3lio.\r\n\r\nTodos os assets feitos por terceiros utilizados aqui
-    est\xE3o creditados a seguir.\r\n\r\n\r\nPrograma\xE7\xE3o e Game Design \r\nPedro
-    Fidler Rios\r\n\r\nAgradecimentos Especiais e Cr\xE9ditos\r\n\r\nObrigado aos
-    professores Marcelo Abadie e Guilherme Vogt pelos ensinamentos.\r\n\r\nE pelos
-    assets, obrigado \xE0:\r\n\r\nSound Effects\r\n\r\ntoefur\r\nSamsterBirdies\r\nLittleRobotSoundFactory\r\nHorrorAudio\r\nwoodmoose\r\nBird_man\r\nMixedupmoviestuff\r\nTheSoundFXGuy_YT\r\ncabled_mess\r\nFlying_Deer_Fx\r\nmrickey13\r\nXxChr0nosxX\r\nMozfoo\r\nMisterKidX\r\nEricsSoundschmiede\r\n\r\n\r\nMusic\r\n\r\nzagi2\r\nBloodPixelHero\r\n\r\n\r\nFonts\r\n\r\nPizzadude\r\nPutraCetol
+  m_Text: "This  game  was  developed  by  Pedro  Fidler  as  a  final  project 
+    for  a  Technical course  in  game  development.\n\nIt  does  not  have  any 
+    commercial  purposes.\n\nAll  the  assets  made  by  others  are  credited  below\n\r\n\r\n\nGame
+    Design \r and  Programming\nPedro Fidler Rios\r\n\r\nSpecial  Thanks\n\r\nTo 
+    the  teachers   Marcelo  Abadie  and  Guilherme  Vogt\n\r\n\nAnd  for  the  assets, 
+    thanks  to:\n\r\nSound Effects\r\n\r\ntoefur\r\nSamsterBirdies\r\nLittleRobotSoundFactory\r\nHorrorAudio\r\nwoodmoose\r\nBird_man\r\nMixedupmoviestuff\r\nTheSoundFXGuy_YT\r\ncabled_mess\r\nFlying_Deer_Fx\r\nmrickey13\r\nXxChr0nosxX\r\nMozfoo\r\nMisterKidX\r\nEricsSoundschmiede\r\n\r\n\r\nMusic\r\n\r\nzagi2\r\nBloodPixelHero\r\n\r\n\r\nFonts\r\n\r\nPizzadude\r\nPutraCetol
     Studio\r\n\r\n\r\nAI\r\n\r\nA* Pathfinding   Aron Granberg\r\n\r\n\r\nArt and
     Sprites\n\r\nBrackeys\r\nBen Tristem & Gamedev.Tv Team\r\nGame Art 2D\r\nCopy
     Spright\r\nSegel\r\nBevouliin\r\nIrina Mir (irmirx)"
