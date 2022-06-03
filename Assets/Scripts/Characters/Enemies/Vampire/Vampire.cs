@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Vampire Class derives from the Enemy Class
 public class Vampire : Enemy
 {
-
+    //Vampire State Variables
+    #region State Variables 
     public VampireStateAppear AppearState { get; private set; }
     public VampireStateDisappear DisappearState { get; private set; }
     public VampireStateIdle IdleState { get; private set; }
@@ -12,26 +14,45 @@ public class Vampire : Enemy
     public VampireStateInvisible InvisibleState { get; private set; }
     public VampireStateAttack AttackState { get; private set; }
     public VampireStateDead DeadState { get; private set; }
+    #endregion
 
+    //References needed to be shown in Unity Inspector
+    #region Reference Variables
 
-
+    [Header("Transform References")]                               //References to specific points in space
     [SerializeField] private Transform player;
-    [SerializeField] private HealthBar healthBar;
-
-    [SerializeField] public VampireData vampireData;
-
     [SerializeField] public Transform attackDetectionPoint;
     [SerializeField] public Transform batAttackPoint;
 
+    [Header("Script References")]                                  //Scripts
     [SerializeField] public VampireAnimationEvents vampireAnimationEvents;
     [SerializeField] public VampireEventManager vampireEventManager;
     [SerializeField] public VampireSFX vampireSFX;
 
+    [Header("Data References")]                                    //Data and scriptable objects
+
+    [Header("Prefab References")]                                  //Prefabs
+    [SerializeField] private HealthBar healthBar;
+    [SerializeField] public VampireData vampireData;
+
+    #endregion
+
+    //Other variables of different types
+    #region Other Variables and Properties      
+
     public bool isFlipped = false;
+
+    #endregion
+
+    //Unity MonoBehaviour Methods
+    #region Unity Callback Methods
 
     protected override void Awake()
     {
         base.Awake();
+        //Vampire States Instantiation
+        #region Vampire States Instantiation
+
         AppearState = new VampireStateAppear(this, StateMachine, vampireData, "appear");
         DisappearState = new VampireStateDisappear(this, StateMachine, vampireData, "disappear");
         IdleState = new VampireStateIdle(this, StateMachine, vampireData, "idle");
@@ -40,53 +61,70 @@ public class Vampire : Enemy
         AttackState = new VampireStateAttack(this, StateMachine, vampireData, "attack");
         DeadState = new VampireStateDead(this, StateMachine, vampireData, "dead");
 
+        #endregion
 
     }
 
     protected override void Start()
     {
         base.Start();
-        StateMachine.Initialize(AppearState);
+
+        //Variable attribuition
+        vampireAnimationEvents = GetComponentInChildren<VampireAnimationEvents>();
+
+        //Set vampire initial number of lives
         CurrentHealth = vampireData.lives;
+
+        //Set health bar maximum value
         healthBar.SetMaxHealth(vampireData.lives);
 
+        //Call State Machine Initialization. Initial state should be Appear State
+        StateMachine.Initialize(AppearState);
 
-        vampireAnimationEvents = GetComponentInChildren<VampireAnimationEvents>();
     }
 
     protected override void Update()
     {
         base.Update();
+
+        //Call State Tick Method
         StateMachine.CurrentState.Tick();
+
+        //Sets health bar value to current
         healthBar.SetHealth(CurrentHealth);
 
+        //Debugs
         Debug.Log(StateMachine.CurrentState);
         //transform.LookAt(target.position);
     }
 
     private void FixedUpdate()
     {
+        //Call State method Physics Tick
         StateMachine.CurrentState.PhysicsTick();
     }
 
-    public void KillVampire()
+    #endregion
+
+    //Vampire Script Methods
+    #region Methods
+
+    public void KillVampire()                                         //Destroys vampire game object
     {
         Destroy(gameObject);
     }
 
-
-    public void BatAttack()
+    public void BatAttack()                                           //Search for nearby objects labled 'Player' and calls its 'Take Damage' method
     {
         Collider2D hitPlayer = Physics2D.OverlapCircle(batAttackPoint.position, vampireData.batAttackRadius, vampireData.whatIsPlayer);
         if (hitPlayer)
         {
-            Debug.Log("CACETADA");
             Player player = hitPlayer.GetComponent<Player>();
             player.TakeDamage(vampireData.attackDamage);
         }
     }
 
-    public void FollowPlayer()
+    public void FollowPlayer()                                        //Makes the Vampire object walk towards the Player object in the Horizontal Axis
     {
         if(player != null)
         {
@@ -94,12 +132,10 @@ public class Vampire : Enemy
             Vector2 newPosition = Vector2.MoveTowards(Rigidbody2D.position, target, vampireData.movementVelocity * Time.fixedDeltaTime);
             Rigidbody2D.MovePosition(newPosition);
         }
-
-        
     }
 
 
-    public void LookAtPlayer()
+    public void LookAtPlayer()                                        //Flips Vampire object's sprite to face the Player object
     {
         if (player != null)
         {
@@ -122,14 +158,17 @@ public class Vampire : Enemy
 
     }
 
-    public void CallFlahsDeathEffect()
+    public void CallFlahsDeathEffectCoroutine()                                //Calls the coroutine that flashes the sprite
     {
         StartCoroutine(FlashDeathEffect());
     }
 
+    public void CallChasingPlayerCoroutine()
+    {
+        StartCoroutine(ChasingPlayerPeriod());
+    }
 
-
-    private IEnumerator FlashDeathEffect()
+    private IEnumerator FlashDeathEffect()                            //Coroutine that applies a flash effect to the object's sprite for some time
     {
         float flashAmount = 0;
         
@@ -143,8 +182,21 @@ public class Vampire : Enemy
     }
 
 
+    private IEnumerator ChasingPlayerPeriod()
+    {
+
+        yield return new WaitForSeconds(Random.Range(vampireData.minWalkTime, vampireData.maxWalkTime));
+        if (vampireEventManager.OnChasingEnded != null)
+        {
+            vampireEventManager.OnChasingEnded();
+        }
+    }
+
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(batAttackPoint.position, vampireData.batAttackRadius);
     }
+
+    #endregion
 }

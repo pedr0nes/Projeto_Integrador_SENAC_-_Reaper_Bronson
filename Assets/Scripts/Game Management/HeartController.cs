@@ -2,18 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* Heart Controller is a Unity MonoBehaviour derived class
+ * It is responsible for managing the number of hearts (player lives) displayed on canvas
+ * It is attached to the Canvas Game Object called 'Hearts Remaining'
+ * It is not the most efficient way to do it and it will be optimized in the future, but it works.
+ */
+
 public class HeartController : MonoBehaviour
 {
-    public GameManager m_GameManager;
+    #region Variables
+    [Header("Script References")]
+    [Tooltip("Game Manager script attached to the Game Manager object")]
+    [SerializeField] public GameManager m_GameManager;
+
+    [Header("Canvas Hearts References")]
+    [Tooltip("References to each one of the canvas hearts. They are the child objects to the 'Hearts Remaining' game object located on canvas")]
     [SerializeField] private GameObject heart0;
     [SerializeField] private GameObject heart1;
     [SerializeField] private GameObject heart2;
     [SerializeField] private GameObject heart3;
     [SerializeField] private GameObject heart4;
 
+    #endregion
+
+    //Unity MonoBehaviour Methods
+    #region Unity Callback Methods
     private void Awake()
     {
-        
+        //Hearts atribution
         heart0 = gameObject.transform.GetChild(0).gameObject;
         heart1 = gameObject.transform.GetChild(1).gameObject;
         heart2 = gameObject.transform.GetChild(2).gameObject;
@@ -29,8 +45,7 @@ public class HeartController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //m_GameManager = FindObjectOfType<GameManager>();
+        //Keeps track of current number of hearts value and updates how many should be shown in-game
         if (m_GameManager.CurrentNumberOfHearts == 5)
         {
             heart0.SetActive(true);
@@ -47,7 +62,6 @@ public class HeartController : MonoBehaviour
             heart3.SetActive(true);
             heart4.SetActive(false);
         }
-
         else if (m_GameManager.CurrentNumberOfHearts == 3)
         {
             heart0.SetActive(true);
@@ -81,4 +95,6 @@ public class HeartController : MonoBehaviour
             heart4.SetActive(false);
         }
     }
+
+    #endregion
 }

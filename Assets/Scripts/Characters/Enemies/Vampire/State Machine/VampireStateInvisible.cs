@@ -51,4 +51,6 @@ public class VampireStateInvisible : State
         stateMachine.ChangeState(vampire.AppearState);
     }
 
+
+
 }

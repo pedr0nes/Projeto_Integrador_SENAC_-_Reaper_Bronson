@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd8d985a12be174aa46f0e963841b45, type: 3}
   m_Name: GhostData
   m_EditorClassIdentifier: 
-  lives: 1
+  lives: 2
   attackDamage: 1
   attackDetectionRadius: 1
   whatIsGround:

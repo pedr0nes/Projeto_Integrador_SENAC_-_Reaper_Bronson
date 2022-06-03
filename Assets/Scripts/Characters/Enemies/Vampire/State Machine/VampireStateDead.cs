@@ -19,7 +19,7 @@ public class VampireStateDead : State
     {
         base.Enter();
         abilityCurrentTime = 0f;
-        vampire.CallFlahsDeathEffect();
+        vampire.CallFlahsDeathEffectCoroutine();
         vampire.vampireSFX.PlayVampireDieSFX();
     }
 

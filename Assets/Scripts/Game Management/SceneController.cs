@@ -27,10 +27,6 @@ public class SceneController : MonoBehaviour
         //{
         //    return;
         //}
-
-
-
-
     }
 
 
@@ -85,7 +81,6 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene(4);
     }
-
 
     public void LoadGame(int scene)
     {

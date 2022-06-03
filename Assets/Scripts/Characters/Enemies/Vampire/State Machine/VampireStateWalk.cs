@@ -19,6 +19,9 @@ public class VampireStateWalk : State
     public override void Enter()
     {
         base.Enter();
+
+        vampire.CallChasingPlayerCoroutine();
+
         vampire.vampireEventManager.OnPlayerFound += TransitionToAttack;
         vampire.vampireEventManager.OnChasingEnded += TransitionToIdle;
         vampire.vampireEventManager.OnVampireDead += TransitionToDead;

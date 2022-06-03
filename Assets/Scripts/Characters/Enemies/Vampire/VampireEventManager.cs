@@ -2,22 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* Vampire Event Manager Class
+ * Class created to manage in game events related to the Vampire character in a Observer Pattern approach
+ * Animation events are managed in a different script
+ * All event names are self explanatory
+ */
+
 public class VampireEventManager : MonoBehaviour
 {
-    public Vampire thisVampire;
+    //Script References
+    [SerializeField] public Vampire thisVampire;
 
+    //Event Declaration
     public delegate void VampireAction();
-
     public VampireAction OnPlayerFound;
     public VampireAction OnPlayerGone;
     public VampireAction OnVampireDead;
-
     public VampireAction OnChasingEnded;
     public VampireAction OnIdleEnded;
     public VampireAction OnInvisibleEnded;
 
+    //Variable Declaration
     private Collider2D isPlayerNearby;
 
+
+    #region Unity Methods
     private void Start()
     {
         thisVampire = GetComponent<Vampire>();
@@ -29,6 +38,26 @@ public class VampireEventManager : MonoBehaviour
 
         VampireDeath();
     }
+
+    private void OnEnable()
+    {
+        //VampireStateWalk.OnWalkStarted += CallChasingPlayer;
+        VampireStateIdle.OnIdleStarted += CallIdlePeriod;
+        VampireStateInvisible.OnInvisibleStarted += CallInvisiblePeriod;
+    }
+
+    private void OnDisable()
+    {
+        //VampireStateWalk.OnWalkStarted -= CallChasingPlayer;
+        VampireStateIdle.OnIdleStarted -= CallIdlePeriod;
+        VampireStateInvisible.OnInvisibleStarted -= CallInvisiblePeriod;
+    }
+
+
+
+    #endregion
+
+    #region Class Specific Methods
 
     private void PlayerCheck()
     {
@@ -49,27 +78,15 @@ public class VampireEventManager : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        VampireStateWalk.OnWalkStarted += CallChasingPlayer;
-        VampireStateIdle.OnIdleStarted += CallIdlePeriod;
-        VampireStateInvisible.OnInvisibleStarted += CallInvisiblePeriod;
-    }
-
-    private void OnDisable()
-    {
-        VampireStateWalk.OnWalkStarted -= CallChasingPlayer;
-        VampireStateIdle.OnIdleStarted -= CallIdlePeriod;
-        VampireStateInvisible.OnInvisibleStarted -= CallInvisiblePeriod;
-    }
 
 
 
-    private void CallChasingPlayer()
+
+    /*private void CallChasingPlayer()
     {
         Debug.Log("Chamou Chasing Player");
         StartCoroutine(ChasingPlayerPeriod());
-    }
+    }*/
 
     private void CallIdlePeriod()
     {
@@ -83,7 +100,7 @@ public class VampireEventManager : MonoBehaviour
 
 
 
-    private IEnumerator ChasingPlayerPeriod()
+    /*private IEnumerator ChasingPlayerPeriod()
     {
         
         yield return new WaitForSeconds(Random.Range(thisVampire.vampireData.minWalkTime, thisVampire.vampireData.maxWalkTime));
@@ -92,7 +109,7 @@ public class VampireEventManager : MonoBehaviour
             OnChasingEnded();
         }
     }
-
+    */
 
 
 
@@ -126,5 +143,5 @@ public class VampireEventManager : MonoBehaviour
         }
     }
 
-
+    #endregion
 }
