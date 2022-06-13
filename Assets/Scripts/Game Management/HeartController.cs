@@ -26,7 +26,7 @@ public class HeartController : MonoBehaviour
     #endregion
 
     //Unity MonoBehaviour Methods
-    #region Unity Callback Methods
+    #region Unity Methods
     private void Awake()
     {
         //Hearts atribution
@@ -36,13 +36,7 @@ public class HeartController : MonoBehaviour
         heart3 = gameObject.transform.GetChild(3).gameObject;
         heart4 = gameObject.transform.GetChild(4).gameObject;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
         //Keeps track of current number of hearts value and updates how many should be shown in-game

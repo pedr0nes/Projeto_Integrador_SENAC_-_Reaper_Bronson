@@ -9,12 +9,6 @@ using UnityEngine;
 
 public class PlayerStateMelee : PlayerStateAbility
 {
-    //Variable declaration
-    private float abilityCurrentTime;
-
-    //States' events declaration. Type: StateAction
-    public static event StateAction OnMeleeFinished;
-
     //Class constructor
     public PlayerStateMelee(Character character, StateMachine stateMachine, CharacterData characterData, string animParameterName) : base(character, stateMachine, characterData, animParameterName)
     {
@@ -52,21 +46,8 @@ public class PlayerStateMelee : PlayerStateAbility
     {
         base.Tick();
 
-        //Stores this state ability current time in a float variable for checks
-        abilityCurrentTime = Time.time;
-
         //Checks need for change in attack animation and calls the proper animation
         ChangeScytheAnimation();
-
-        //After a brief period of time, notifies script that melee state can be exited and next state should be called. Attack animation is not cancelled though and next animation starts after it is finished.
-        //Not sure if it is the best way to do it, but it works. Might change it later.
-        if (abilityCurrentTime - startTime > 0.1f)
-        {
-            if (OnMeleeFinished != null)
-            {
-                OnMeleeFinished();
-            }
-        }
     }
 
     //Physics Tick method. Will be called in Unity FixedUpdate

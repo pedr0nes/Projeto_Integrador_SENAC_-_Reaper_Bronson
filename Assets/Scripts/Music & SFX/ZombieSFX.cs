@@ -27,7 +27,6 @@ public class ZombieSFX : MonoBehaviour
 
     public void PlayZombieDieSFX()
     {
-
             AudioSource.PlayClipAtPoint(zombieDie, Camera.main.transform.position);
     }
 

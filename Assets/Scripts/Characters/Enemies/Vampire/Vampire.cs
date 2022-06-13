@@ -45,7 +45,7 @@ public class Vampire : Enemy
     #endregion
 
     //Unity MonoBehaviour Methods
-    #region Unity Callback Methods
+    #region Unity Methods
 
     protected override void Awake()
     {
@@ -75,7 +75,7 @@ public class Vampire : Enemy
         //Set vampire initial number of lives
         CurrentHealth = vampireData.lives;
 
-        //Set health bar maximum value
+        //Set health bar to the maximum value
         healthBar.SetMaxHealth(vampireData.lives);
 
         //Call State Machine Initialization. Initial state should be Appear State
@@ -90,7 +90,7 @@ public class Vampire : Enemy
         //Call State Tick Method
         StateMachine.CurrentState.Tick();
 
-        //Sets health bar value to current
+        //Sets the health bar value to current
         healthBar.SetHealth(CurrentHealth);
 
         //Debugs
@@ -103,11 +103,15 @@ public class Vampire : Enemy
         //Call State method Physics Tick
         StateMachine.CurrentState.PhysicsTick();
     }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(batAttackPoint.position, vampireData.batAttackRadius);
+    }
 
     #endregion
 
     //Vampire Script Methods
-    #region Methods
+    #region Vampire Script Methods
 
     public void KillVampire()                                         //Destroys vampire game object
     {
@@ -134,7 +138,6 @@ public class Vampire : Enemy
         }
     }
 
-
     public void LookAtPlayer()                                        //Flips Vampire object's sprite to face the Player object
     {
         if (player != null)
@@ -158,14 +161,24 @@ public class Vampire : Enemy
 
     }
 
-    public void CallFlahsDeathEffectCoroutine()                                //Calls the coroutine that flashes the sprite
+    public void CallFlahsDeathEffectCoroutine()                       //Calls the coroutine that flashes the sprite
     {
         StartCoroutine(FlashDeathEffect());
     }
 
-    public void CallChasingPlayerCoroutine()
+    public void CallChasingPlayerCoroutine()                          //Calls the coroutine that sets and tracks the duration of the period that the Vampire will be following the player object
     {
         StartCoroutine(ChasingPlayerPeriod());
+    }
+
+    public void CallIdlePeriodCoroutine()                             //Calls the coroutine that sets and tracks the duration of the period that the Vampire will be idle and visible
+    {
+        StartCoroutine(IdlePeriod());
+    }
+
+    public void CallInvisiblePeriodCoroutine()                        //Calls the coroutine that sets and tracks the duration of the period that the Vampire will be invisible
+    {
+        StartCoroutine(InvisiblePeriod());
     }
 
     private IEnumerator FlashDeathEffect()                            //Coroutine that applies a flash effect to the object's sprite for some time
@@ -181,22 +194,34 @@ public class Vampire : Enemy
         yield return null;
     }
 
-
-    private IEnumerator ChasingPlayerPeriod()
+    private IEnumerator ChasingPlayerPeriod()                         //Coroutine that sets and keeps track of the period that the Vampire will be following the player object. It also raises a event when it should stop.     
     {
-
         yield return new WaitForSeconds(Random.Range(vampireData.minWalkTime, vampireData.maxWalkTime));
         if (vampireEventManager.OnChasingEnded != null)
         {
             vampireEventManager.OnChasingEnded();
         }
-    }
+    }                                           
 
-
-    private void OnDrawGizmosSelected()
+    private IEnumerator IdlePeriod()                                  //Coroutine that sets and keeps track of the period that the Vampire will be idle. It also raises a event when it should stop.
     {
-        Gizmos.DrawWireSphere(batAttackPoint.position, vampireData.batAttackRadius);
+        yield return new WaitForSeconds(vampireData.idleTime);
+        if (vampireEventManager.OnIdleEnded != null)
+        {
+            vampireEventManager.OnIdleEnded();
+        }
     }
+
+    private IEnumerator InvisiblePeriod()                             //Coroutine that sets and keeps track of the period that the Vampire will be invisible. It also raises a event when it should stop.
+    {
+        yield return new WaitForSeconds(vampireData.invisibleTime);
+        if (vampireEventManager.OnInvisibleEnded != null)
+        {
+            vampireEventManager.OnInvisibleEnded();
+        }
+    }
+
+
 
     #endregion
 }

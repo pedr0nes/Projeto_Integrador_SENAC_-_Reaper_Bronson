@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Music Player is a Unity MonoBehaviour derived class
+// Its purpose is to set the Music Player Object with a Singleton Pattern
+
 public class MusicPlayer : MonoBehaviour
 {
     private void Awake()
@@ -9,11 +12,6 @@ public class MusicPlayer : MonoBehaviour
         SetUpSingleton();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void SetUpSingleton()
     {

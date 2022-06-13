@@ -2,20 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Menu Music Controller is a Unity MonoBehaviour derived class
+// Its purpose is to set the Menu Music Controller Object with a Singleton Pattern
+
 public class MenuMusicController : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         SetUpSingleton();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     private void SetUpSingleton()
     {

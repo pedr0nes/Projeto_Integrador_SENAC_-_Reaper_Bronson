@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.SceneManagement;
+
 
 /* Game Manager is a Unity MonoBehaviour derived class
  * It is responsible for managing in-game checks, canvases and victory/defeat conditions
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     //Unity MonoBehaviour Methods
-    #region Unity Callback Methods
+    #region Unity Methods
     private void Awake()
     {
         //Sets this game object to be a singleton

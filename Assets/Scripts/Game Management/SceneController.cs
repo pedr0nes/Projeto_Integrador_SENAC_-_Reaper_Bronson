@@ -3,52 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/* Scene Controller is a Unity MonoBehaviour derived class
+ * It is responsible for managing scene transitions and loadings
+ * It is not optimized yet. Probably its structure will be altered in future uptades. It is functional though.
+ */
+
 public class SceneController : MonoBehaviour
 {
-    [SerializeField] GameObject winScreen;
-    private GameManager m_GameManager;
 
+    #region Scene Controller Methods
 
-    private void Start()
-    {
-        //if (FindObjectOfType<GameManager>() == true)
-        //{
-        //    m_GameManager = FindObjectOfType<GameManager>();
-        //    if (m_GameManager.PlayerWon)
-        //    {
-        //        winScreen.SetActive(true);
-        //    }
-        //    else
-        //    {
-        //        winScreen.SetActive(false);
-        //    }
-        //}
-        //else
-        //{
-        //    return;
-        //}
-    }
-
-
-    public void LoadTryAgain()
-    {
-        if(m_GameManager)
-        {
-            Destroy(m_GameManager);
-            SceneManager.LoadScene(1);
-        }
-        else
-        {
-            SceneManager.LoadScene(1);
-        }
-
-    }
-
+    //Reloads Current Scene
     public void ReloadScene()
     {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.buildIndex);
     }
+
+    //Loads Main Menu Scene after destroying the in-game music player, if there is one
     public void LoadMainMenu()
     {
         MusicPlayer musicPlayer = FindObjectOfType<MusicPlayer>();
@@ -60,28 +32,31 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    //Loads the Stage Selection Menu
     public void LoadMoviesMenu()
     {
         SceneManager.LoadScene(1);
     }
 
-
-
-    public void LoadHelpMenu()
-    {
-        SceneManager.LoadScene(2);
-    }
-
-    public void LoadCreditsMenu()
-    {
-        SceneManager.LoadScene(3);
-    }
-
+    //Loads Stage Acts (Game Scenes) Menu
     public void LoadActsMenu()
     {
         SceneManager.LoadScene(4);
     }
 
+    //Loads the Help/Tutorial Menu
+    public void LoadHelpMenu()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    //Loads the Credits
+    public void LoadCreditsMenu()
+    {
+        SceneManager.LoadScene(3);
+    }
+
+    //Loads the Game Scene after destroying the menu music player, if there is one
     public void LoadGame(int scene)
     {
         MenuMusicController menuMusic = FindObjectOfType<MenuMusicController>();
@@ -94,17 +69,13 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
 
-    public void LoadFinalScreen()
-    {
-        SceneManager.LoadScene(8);
-    }
-
-
-
+    //Quits the game
     public void LoadQuitGame()
     {
         Application.Quit();
     }
 
+
+    #endregion
 
 }

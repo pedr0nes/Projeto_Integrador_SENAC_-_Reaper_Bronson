@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /* Vampire Event Manager Class
- * Class created to manage in game events related to the Vampire character in a Observer Pattern approach
+ * Class created to manage in-game events related to the Vampire character in a Observer Pattern approach
  * Animation events are managed in a different script
  * All event names are self explanatory
  */
@@ -25,40 +25,25 @@ public class VampireEventManager : MonoBehaviour
     //Variable Declaration
     private Collider2D isPlayerNearby;
 
-
     #region Unity Methods
     private void Start()
     {
+        //Variable Attribution
         thisVampire = GetComponent<Vampire>();
     }
 
     private void Update()
     {
+        //Method Calls
         PlayerCheck();
-
         VampireDeath();
     }
-
-    private void OnEnable()
-    {
-        //VampireStateWalk.OnWalkStarted += CallChasingPlayer;
-        VampireStateIdle.OnIdleStarted += CallIdlePeriod;
-        VampireStateInvisible.OnInvisibleStarted += CallInvisiblePeriod;
-    }
-
-    private void OnDisable()
-    {
-        //VampireStateWalk.OnWalkStarted -= CallChasingPlayer;
-        VampireStateIdle.OnIdleStarted -= CallIdlePeriod;
-        VampireStateInvisible.OnInvisibleStarted -= CallInvisiblePeriod;
-    }
-
-
 
     #endregion
 
     #region Class Specific Methods
 
+    //Notifies subscribed scripts when this vampire finds the Player nearby or when the Player is gone from reach
     private void PlayerCheck()
     {
         isPlayerNearby = Physics2D.OverlapCircle(thisVampire.attackDetectionPoint.position, thisVampire.vampireData.attackDetectionRadius, thisVampire.vampireData.whatIsPlayer);
@@ -78,60 +63,7 @@ public class VampireEventManager : MonoBehaviour
         }
     }
 
-
-
-
-
-    /*private void CallChasingPlayer()
-    {
-        Debug.Log("Chamou Chasing Player");
-        StartCoroutine(ChasingPlayerPeriod());
-    }*/
-
-    private void CallIdlePeriod()
-    {
-        StartCoroutine(IdlePeriod());
-    }
-
-    private void CallInvisiblePeriod()
-    {
-        StartCoroutine(InvisiblePeriod());
-    }
-
-
-
-    /*private IEnumerator ChasingPlayerPeriod()
-    {
-        
-        yield return new WaitForSeconds(Random.Range(thisVampire.vampireData.minWalkTime, thisVampire.vampireData.maxWalkTime));
-        if(OnChasingEnded != null)
-        {
-            OnChasingEnded();
-        }
-    }
-    */
-
-
-
-    private IEnumerator IdlePeriod()
-    {
-        yield return new WaitForSeconds(thisVampire.vampireData.idleTime);
-        if(OnIdleEnded != null)
-        {
-            OnIdleEnded();
-        }
-    }
-
-    private IEnumerator InvisiblePeriod()
-    {
-        yield return new WaitForSeconds(thisVampire.vampireData.invisibleTime);
-        if (OnInvisibleEnded != null)
-        {
-            OnInvisibleEnded();
-        }
-    }
-
-
+    //Notifies subscribed scripts when this zombie character health is below 0 (zero)
     private void VampireDeath()
     {
         if (thisVampire.CurrentHealth <= 0)
